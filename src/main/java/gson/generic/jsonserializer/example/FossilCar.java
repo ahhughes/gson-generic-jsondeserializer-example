@@ -12,4 +12,9 @@ public class FossilCar extends AbstractCar {
 		this.fuel = fuel;
 	}
 
+	@Override
+	public String toString() {
+		return "FossilCar [fuel=" + fuel + ", getId()=" + getId() + "]";
+	}
+
 }

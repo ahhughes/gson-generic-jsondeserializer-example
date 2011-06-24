@@ -20,8 +20,8 @@ public class CarsJsonDeserializerTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		//TODO register by class or type? I don't know!
-		gsonBuilder.registerTypeAdapter(Cars.class, new CarsJsonDeserializer());
+		Type type = new TypeToken<Cars<?>>(){}.getType();
+		gsonBuilder.registerTypeAdapter(type, new CarsInstanceCreator());
 		gsonBuilder.setPrettyPrinting();
 		gson = gsonBuilder.create();
 	}
@@ -44,6 +44,7 @@ public class CarsJsonDeserializerTest {
 		Assert.assertNotNull(cars.getCars());
 		Assert.assertTrue(cars.getCars().size()>0);
 		for (ElectricCar electricCar : cars.getCars()){
+			log.debug("Got one!" +electricCar.toString());
 			Assert.assertNotNull(electricCar);
 			Assert.assertNotNull(electricCar.getId());
 			Assert.assertTrue(electricCar.getId()> 0);
@@ -73,6 +74,7 @@ public class CarsJsonDeserializerTest {
 		Assert.assertNotNull(cars.getCars());
 		Assert.assertTrue(cars.getCars().size()>0);
 		for (FossilCar fossilCar : cars.getCars()){
+			log.debug("FossilCar.toString()=="+fossilCar.toString());
 			Assert.assertNotNull(fossilCar);
 			Assert.assertNotNull(fossilCar.getId());
 			Assert.assertTrue(fossilCar.getId()> 0);

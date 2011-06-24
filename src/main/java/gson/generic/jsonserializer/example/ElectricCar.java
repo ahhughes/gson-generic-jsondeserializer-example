@@ -12,4 +12,9 @@ public class ElectricCar extends AbstractCar {
 		this.battery = battery;
 	}
 
+	@Override
+	public String toString() {
+		return "ElectricCar [battery=" + battery + ", getId()=" + getId() + "]";
+	}
+
 }
